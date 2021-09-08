@@ -1,10 +1,8 @@
-// https://github.com/open-sauced/goals-template/blob/main/.github/workflows/sync-2-upstream.yml
-
-name: Sync to Upstream
+name: "Sync to Upstream"
 
 on:
   schedule:
-    - cron:  '* * * * *'
+    - cron:  '*/6 * * * *'
   workflow_dispatch:
 
 jobs:
