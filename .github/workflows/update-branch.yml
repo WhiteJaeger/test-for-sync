@@ -32,9 +32,10 @@ jobs:
       - name: Update PR branch
         run: |
           git remote add pr_remote ${{ steps.fetch_pr_and_target_branch.outputs.pr_remote_url }}
+          git remote -v
           git fetch pr_remote
           git checkout ${{ steps.fetch_pr_and_target_branch.outputs.pr_branch }}
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git merge ${{ steps.fetch_pr_and_target_branch.outputs.base_branch }} --no-edit
+          git merge pr_remote/${{ steps.fetch_pr_and_target_branch.outputs.base_branch }} --no-edit
           git push
