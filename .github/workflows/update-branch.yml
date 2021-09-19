@@ -2,14 +2,16 @@ name: "Update PR Branch on PR Comment"
 on:
   issue_comment:
     types: [created]
+
 jobs:
-  update_pr_branch:
+  sync:
+    
     name: Update PR Branch on PR Comment
     if: github.event.issue.pull_request != '' && github.event.comment.body == '/update'
     runs-on: ubuntu-latest
+    
     steps:
       - uses: tgymnich/fork-sync@v1.4
-      - name: Update PR branch
         with:
           base: main
           head: main
