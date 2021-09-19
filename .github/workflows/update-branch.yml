@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Fetch latest code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Fetch PR and target branch names
         id: fetch_pr_and_target_branch
         uses: actions/github-script@v3
@@ -33,9 +31,9 @@ jobs:
         run: |
           git remote add pr_remote ${{ steps.fetch_pr_and_target_branch.outputs.pr_remote_url }}
           git remote -v
-          git fetch pr_remote
-          git checkout ${{ steps.fetch_pr_and_target_branch.outputs.pr_branch }}
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git merge pr_remote/${{ steps.fetch_pr_and_target_branch.outputs.base_branch }} --no-edit
-          git push
+          # git fetch pr_remote
+          # git checkout ${{ steps.fetch_pr_and_target_branch.outputs.pr_branch }}
+          # git config user.name 'github-actions[bot]'
+          # git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # git merge pr_remote/${{ steps.fetch_pr_and_target_branch.outputs.base_branch }} --no-edit
+          # git push
