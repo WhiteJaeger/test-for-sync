@@ -36,5 +36,5 @@ jobs:
           git checkout pr_remote/${{ steps.fetch_pr_and_target_branch.outputs.pr_branch }}
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git merge origin/${{ steps.fetch_pr_and_target_branch.outputs.base_branch }} --no-edit
+          git merge origin/${{ steps.fetch_pr_and_target_branch.outputs.base_branch }} --no-edit --allow-unrelated-histories
           git push pr_remote main
