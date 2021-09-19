@@ -24,8 +24,9 @@ jobs:
             });
             const { ref: prBranch } = pullRequest.head;
             const { ref: baseBranch } = pullRequest.base;
+            const { clone_url: prRemoteUrl } = pullRequest.head.repo;
             console.log(`##[set-output name=pr_branch;]${prBranch}`);
-            console.log(`##[set-output name=pr_remote_url;]https://github.com/WhiteJaeger/test-for-sync`);
+            console.log(`##[set-output name=pr_remote_url;]${prRemoteUrl}`);
             console.log(`##[set-output name=base_branch;]${baseBranch}`);
       - name: Update PR branch
         run: |
