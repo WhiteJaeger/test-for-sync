@@ -30,23 +30,26 @@ jobs:
       - name: Merge upstream
         id: update
         run: |
-          git config --global user.name 'WhiteJaeger'
-          git config --global user.email 'WhiteJaeger@users.noreply.github.com'
+          chmod +x automation/github/update-branch.sh
+          automation/github/update-branch.sh --URL ${{ steps.fetch_remote_url.outputs.pr_remote_url }} --USER WhiteJaeger
 
-          git pull --unshallow
-
-          git remote add upstream ${{ steps.fetch_remote_url.outputs.pr_remote_url }}
-          git fetch upstream
-          
-          git remote -v
-
-          git checkout main
-          git merge --no-edit upstream/main
-          
-          DIFF=$(git diff --name-only HEAD@{0} HEAD@{1})
-          echo ::set-output name=files_diff::"${DIFF}"
-          
-          git push upstream main
+#          git config --global user.name 'WhiteJaeger'
+#          git config --global user.email 'WhiteJaeger@users.noreply.github.com'
+#
+#          git pull --unshallow
+#
+#          git remote add upstream ${{ steps.fetch_remote_url.outputs.pr_remote_url }}
+#          git fetch upstream
+#
+#          git remote -v
+#
+#          git checkout main
+#          git merge --no-edit upstream/main
+#
+#          DIFF=$(git diff --name-only HEAD@{0} HEAD@{1})
+#          echo ::set-output name=files_diff::"${DIFF}"
+#
+#          git push upstream main
       - name: Report on update 
         uses: actions/github-script@v3
         with:
