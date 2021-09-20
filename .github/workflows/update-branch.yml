@@ -46,3 +46,14 @@ jobs:
           git checkout main
           git merge --no-edit upstream/main
           git push upstream main
+      
+      - uses: actions/github-script@v3
+      - name: Report on update
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Branch was updated!'
+            })
