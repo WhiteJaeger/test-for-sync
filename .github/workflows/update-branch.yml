@@ -46,9 +46,8 @@ jobs:
           git checkout main
           git merge --no-edit upstream/main
           git push upstream main
-      
-      - name: Report on update
-      - uses: actions/github-script@v3
+      - name: Report on update 
+        uses: actions/github-script@v3
         with:
           script: |
             github.issues.createComment({
