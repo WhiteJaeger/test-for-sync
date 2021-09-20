@@ -11,14 +11,4 @@ print('f')
 print('of')
 print('r')
 print('f ')
-print(' ffffff')
-some text
-some text
-some text
-some text
-some text
-some text
-some text
-some text
-some text
-some text
+print(' ffffadsadsff')
