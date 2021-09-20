@@ -8,7 +8,7 @@ jobs:
   sync:
     
     name: Update PR Branch on PR Comment
-    if: github.event.issue.pull_request != '' && github.event.comment.body == '/update'
+    if: github.event.issue.pull_request != '' && (github.event.comment.body == '/update' || github.event.comment.body == '/update:force')
     runs-on: ubuntu-latest
     
     steps:
@@ -30,8 +30,16 @@ jobs:
       - name: Merge upstream
         id: update
         run: |
+
+          # Determine whether force update is needed
+          FORCE=0
+          COMMENT=${{ github.event.comment.body }}
+          if [[ $COMMENT == *"force"* ]]; then
+            FORCE=1
+          fi
+
           chmod +x automation/github/update-branch.sh
-          automation/github/update-branch.sh --URL ${{ steps.fetch_remote_url.outputs.pr_remote_url }} --USER WhiteJaeger
+          automation/github/update-branch.sh --URL ${{ steps.fetch_remote_url.outputs.pr_remote_url }} --USER WhiteJaeger --FORCE $FORCE
 
 #          git config --global user.name 'WhiteJaeger'
 #          git config --global user.email 'WhiteJaeger@users.noreply.github.com'
