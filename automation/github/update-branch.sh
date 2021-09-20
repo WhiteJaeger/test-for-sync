@@ -34,7 +34,7 @@ git remote -v
 git checkout main
 
 if [[ $FORCE -eq 1 ]]; then
-  git merge --strategy-option theirs --no-ff --no-edit upstream/main
+  git merge --strategy-option ours --no-ff --no-edit upstream/main
 else
   git merge --no-edit upstream/main
 fi
