@@ -31,22 +31,20 @@ git fetch upstream
 
 git remote -v
 
-git checkout main
+git checkout upstream/main
 
 if [[ $FORCE -eq 1 ]]; then
-  git merge --strategy-option ours --no-edit upstream/main
+  git merge --strategy-option ours --no-edit origin/main
 else
-  git merge --no-edit upstream/main
+  git merge --no-edit origin/main
 fi
 
 DIFF=$(git diff --name-only HEAD@{0} HEAD@{1})
-
-echo $DIFF
 
 echo ::set-output name=files_diff::"${DIFF}"
 
 if [[ $FORCE -eq 1 ]]; then
   git push upstream HEAD:main
 else
-  git push upstream main
+  git push upstream HEAD:main
 fi
