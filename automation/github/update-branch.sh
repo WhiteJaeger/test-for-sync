@@ -36,10 +36,12 @@ git checkout main
 if [[ $FORCE -eq 1 ]]; then
   git merge --strategy-option ours --no-ff --no-edit upstream/main
 else
-  git merge --no-edit upstream/main
+  git merge --no-edit --no-ff upstream/main
 fi
 
 DIFF=$(git diff --name-only HEAD@{0} HEAD@{1})
+
+echo $DIFF
 
 echo ::set-output name=files_diff::"${DIFF}"
 
