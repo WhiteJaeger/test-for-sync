@@ -33,7 +33,7 @@ jobs:
 
           # Determine whether force update is needed
           FORCE=0
-          COMMENT=${{ github.event.comment.body }}
+          COMMENT="${{ github.event.comment.body }}"
           if [[ "${COMMENT}" == *"force"* ]]; then
             FORCE=1
           fi
