@@ -8,7 +8,7 @@ jobs:
   sync:
     
     name: Update PR Branch on PR Comment
-    if: github.event.issue.pull_request != '' && (github.event.comment.body == '/update' || github.event.comment.body == '/update:force')
+    if: github.event.issue.pull_request != '' && (contains(github.event.comment.body, '/update') || contains(github.event.comment.body, '/update:force'))
     runs-on: ubuntu-latest
     
     steps:
@@ -40,24 +40,6 @@ jobs:
 
           chmod +x automation/github/update-branch.sh
           automation/github/update-branch.sh --URL ${{ steps.fetch_remote_url.outputs.pr_remote_url }} --USER WhiteJaeger --FORCE $FORCE
-
-#          git config --global user.name 'WhiteJaeger'
-#          git config --global user.email 'WhiteJaeger@users.noreply.github.com'
-#
-#          git pull --unshallow
-#
-#          git remote add upstream ${{ steps.fetch_remote_url.outputs.pr_remote_url }}
-#          git fetch upstream
-#
-#          git remote -v
-#
-#          git checkout main
-#          git merge --no-edit upstream/main
-#
-#          DIFF=$(git diff --name-only HEAD@{0} HEAD@{1})
-#          echo ::set-output name=files_diff::"${DIFF}"
-#
-#          git push upstream main
       - name: Report on update 
         uses: actions/github-script@v3
         with:
