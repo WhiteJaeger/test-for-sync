@@ -3,7 +3,7 @@
 while (( "$#" )); do
   case "$1" in
     --URL)
-      REMOTE_URL=$2
+      FORKED_URL=$2
       shift 2
       ;;
     --USER)
@@ -26,7 +26,7 @@ git config --global user.email "${USER}@users.noreply.github.com"
 
 git pull --unshallow
 
-git remote add upstream ${REMOTE_URL}
+git remote add upstream ${FORKED_URL}
 git fetch upstream
 
 git remote -v
@@ -34,7 +34,7 @@ git remote -v
 git checkout upstream/main
 
 if [[ $FORCE -eq 1 ]]; then
-  git merge --strategy-option ours --no-edit origin/main
+  git merge --strategy-option theirs --no-edit origin/main
 else
   git merge --no-edit origin/main
 fi
