@@ -39,7 +39,7 @@ jobs:
           fi
 
           chmod +x automation/github/update-branch.sh
-          automation/github/update-branch.sh --URL ${{ steps.fetch_remote_url.outputs.pr_remote_url }} --USER WhiteJaeger --FORCE $FORCE
+          automation/github/update-branch.sh --URL ${{ steps.fetch_remote_url.outputs.pr_remote_url }} --USER $GITHUB_ACTOR --FORCE $FORCE
       - name: Report on update 
         uses: actions/github-script@v3
         with:
